@@ -1,9 +1,13 @@
 import md5 from 'js-md5'
 
-const host = 'http://api.valantis.store:40000/'
+const host = 'https://api.valantis.store:41000/'
+let date = new Date()
+date = date.toISOString().split('T')[0].replaceAll('-', '')
 
 
 export async function getProduct(action, params) {
+
+    console.log('date', date)
 
     const response = await fetch(host, {
         method: "POST",
@@ -13,7 +17,7 @@ export async function getProduct(action, params) {
         }),
         headers: {
             "content-type": "application/json",
-            "X-Auth": md5("Valantis_20240310"),
+            "X-Auth": md5(`Valantis_${date}`),
         }
     });
 
